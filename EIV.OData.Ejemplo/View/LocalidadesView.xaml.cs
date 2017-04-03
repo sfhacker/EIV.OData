@@ -1,4 +1,4 @@
-﻿
+
 namespace EIV.OData.Ejemplo.View
 {
     using com.cairone.odataexample;
@@ -125,9 +125,16 @@ namespace EIV.OData.Ejemplo.View
             this.localidadesDataSource.RejectChanges();
 
             // is this required?
-            this.localidadesGridView.Rebind();
-            
+            //this.localidadesGridView.Rebind();
+            this.localidadesGridView.CancelEdit();
+
             this.statusInfo.Text = string.Empty;
+        }
+
+        private void localidadesGridView_CellValidated(object sender, Telerik.Windows.Controls.GridViewCellValidatedEventArgs e)
+        {
+            var alas = e.ValidationResult;
+
         }
     }
 }
