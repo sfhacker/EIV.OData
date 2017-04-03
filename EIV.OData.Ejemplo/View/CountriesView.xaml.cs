@@ -1,10 +1,12 @@
-﻿
+
 namespace EIV.OData.Ejemplo.View
 {
     using com.cairone.odataexample;
+    using Command;
     using Microsoft.OData.Client;
     using System.Windows;
     using Telerik.Windows;
+    using Telerik.Windows.Controls.GridView;
     using ViewModel;
 
     /// <summary>
@@ -64,6 +66,8 @@ namespace EIV.OData.Ejemplo.View
             else
             {
                 this.statusInfo.Text = "Server is content!";
+
+                //this.paisesDataPager.IsEnabled = true;
             }
         }
 
@@ -80,6 +84,7 @@ namespace EIV.OData.Ejemplo.View
         // if then the user clicks on'Delete' button
         // well, you know what happens
         // is there any other way of doing this?
+        // IsSynchronizedWithCurrentItem = "False"
         private void paisesGridView_RowLoaded(object sender, Telerik.Windows.Controls.GridView.RowLoadedEventArgs e)
         {
             if (e.Row.IsSelected)
@@ -93,6 +98,8 @@ namespace EIV.OData.Ejemplo.View
         {
             // No need for this
             //e.NewObject = new Pais();
+            GridViewDataControl grid = e.OwnerGridViewItemsControl;
+            grid.CurrentColumn = grid.Columns[0];
         }
 
         private void btnAdd_Click(object sender, RoutedEventArgs e)
@@ -142,6 +149,8 @@ namespace EIV.OData.Ejemplo.View
         private void btnCancelAll_Click(object sender, RoutedEventArgs e)
         {
             this.paisesDataSource.RejectChanges();
+
+            //this.paisesGridView.CancelEdit();
         }
 
         private void paisesDataSource_SubmittingChanges(object sender, Telerik.Windows.Controls.DataServices.DataServiceSubmittingChangesEventArgs e)
@@ -163,8 +172,23 @@ namespace EIV.OData.Ejemplo.View
                     errorMsg += string.Format("\r\nExtra error info: {0}", e.Error.InnerException.Message);
                 }
 
-                this.statusInfo.Text = "Some error here!";   //  errorMsg;
-                this.paisesDataSource.RejectChanges();
+                this.statusInfo.Text = errorMsg;
+
+                // A Load event will be triggered
+                //this.paisesDataSource.RejectChanges();
+            }
+        }
+
+        private void paisesGridView_Loaded(object sender, RoutedEventArgs e)
+        {
+            this.paisesGridView.KeyboardCommandProvider = new CustomKeyboardCommandProvider(this.paisesGridView);
+        }
+
+        private void paisesGridView_RowEditEnded(object sender, Telerik.Windows.Controls.GridViewRowEditEndedEventArgs e)
+        {
+            if (e.EditAction == GridViewEditAction.Cancel)
+            {
+                e.UserDefinedErrors.Clear();
             }
         }
     }
