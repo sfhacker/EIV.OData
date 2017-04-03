@@ -1,4 +1,4 @@
-﻿<Window x:Class="EIV.OData.Ejemplo.View.LocalidadesView"
+<Window x:Class="EIV.OData.Ejemplo.View.LocalidadesView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:EIV.OData.Ejemplo.Model"
         mc:Ignorable="d"
         xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
-        Title="Localidades" Height="300" Width="600.138">
+        Title="Localidades" Height="300" Width="600.138" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid>
         <telerik:RadDataServiceDataSource x:Name="localidadesDataSource" HorizontalAlignment="Left" VerticalAlignment="Top"
                                           SubmittingChanges="localidadesDataSource_SubmittingChanges" SubmittedChanges="localidadesDataSource_SubmittedChanges"
@@ -16,7 +16,7 @@
             </telerik:RadDataServiceDataSource.DataServiceContext>
         </telerik:RadDataServiceDataSource>
         <telerik:RadGridView x:Name="localidadesGridView" Margin="10,10,150,0" VerticalAlignment="Top" ShowGroupPanel="False" AutoGenerateColumns="False" CanUserReorderColumns="False"
-                             Loaded="localidadesGridView_Loaded" AddingNewDataItem="localidadesGridView_NewItem"
+                             Loaded="localidadesGridView_Loaded" AddingNewDataItem="localidadesGridView_NewItem" CellValidated="localidadesGridView_CellValidated"
                              ItemsSource="{Binding DataView, ElementName=localidadesDataSource}" IsBusy="{Binding IsBusy, ElementName=localidadesDataSource}" SelectionMode="Extended">
             <telerik:RadGridView.Columns>
                 <telerik:GridViewDataColumn DataMemberBinding="{Binding paisId}" Header="PaisId" IsReadOnly="True"/>
@@ -34,16 +34,16 @@
             </StatusBarItem>
         </StatusBar>
         <Border BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" Height="227" Margin="457,10,0,0" VerticalAlignment="Top" Width="1"/>
-        <telerik:RadButton x:Name="btnAdd" HorizontalAlignment="Left" Height="Auto" Margin="463,10,0,0" VerticalAlignment="Top" Width="Auto" Click="btnAdd_Click">
+        <telerik:RadButton x:Name="btnAdd" HorizontalAlignment="Left" Height="Auto" Margin="463,10,0,0" VerticalAlignment="Top" Width="Auto" Click="btnAdd_Click" ToolTip="Nuevo Registro">
             <Image Source="../Images/add.png" Stretch="Uniform" Width="25" />
         </telerik:RadButton>
-        <telerik:RadButton x:Name="btnRemove" HorizontalAlignment="Left" Height="Auto" Margin="497,10,0,0" VerticalAlignment="Top" Width="Auto" Click="btnRemove_Click">
+        <telerik:RadButton x:Name="btnRemove" HorizontalAlignment="Left" Height="Auto" Margin="497,10,0,0" VerticalAlignment="Top" Width="Auto" Click="btnRemove_Click" ToolTip="Eliminar Registro">
             <Image Source="../Images/remove.png" Stretch="Uniform" Width="25" />
         </telerik:RadButton>
-        <telerik:RadButton x:Name="btnSaveAll" HorizontalAlignment="Left" Height="Auto" Margin="463,65,0,0" VerticalAlignment="Top" Width="Auto" Click="btnSaveAll_Click">
+        <telerik:RadButton x:Name="btnSaveAll" HorizontalAlignment="Left" Height="Auto" Margin="463,65,0,0" VerticalAlignment="Top" Width="Auto" Click="btnSaveAll_Click" ToolTip="Guardar todos los cambios">
             <Image Source="../Images/save.png" Stretch="Uniform" Width="25" />
         </telerik:RadButton>
-        <telerik:RadButton x:Name="btnCancelAll" HorizontalAlignment="Left" Height="Auto" Margin="497,65,0,0" VerticalAlignment="Top" Width="Auto" Click="btnCancelAll_Click">
+        <telerik:RadButton x:Name="btnCancelAll" HorizontalAlignment="Left" Height="Auto" Margin="497,65,0,0" VerticalAlignment="Top" Width="Auto" Click="btnCancelAll_Click" ToolTip="Cancelar todos los cambios">
             <Image Source="../Images/close.png" Stretch="Uniform" Width="25"/>
         </telerik:RadButton>
 
