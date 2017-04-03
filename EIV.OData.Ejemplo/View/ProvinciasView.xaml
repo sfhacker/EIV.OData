@@ -1,0 +1,52 @@
+﻿<Window x:Class="EIV.OData.Ejemplo.View.ProvinciasView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EIV.OData.Ejemplo.Model"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation"
+        mc:Ignorable="d"
+        Title="Provincias" Height="328.455" Width="484">
+    <Grid>
+        <telerik:RadDataServiceDataSource x:Name="provinciasDataSource" HorizontalAlignment="Left" VerticalAlignment="Top"
+                                          SubmittingChanges="provinciasDataSource_SubmittingChanges" SubmittedChanges="provinciasDataSource_SubmittedChanges"
+                                          AutoLoad="True" QueryName="Provincias">
+            <telerik:RadDataServiceDataSource.DataServiceContext>
+                <local:DataServiceContext/>
+            </telerik:RadDataServiceDataSource.DataServiceContext>
+        </telerik:RadDataServiceDataSource>
+        <telerik:RadGridView x:Name="provinciasGridView" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" ShowGroupPanel="False" AutoGenerateColumns="False" CanUserReorderColumns="False" Loaded="provinciasGridView_Loaded"
+                             DataLoaded="provinciasGridView_DataLoaded" RowLoaded="provinciasGridView_RowLoaded" SelectionMode="Extended"
+                             AddingNewDataItem="provinciasGridView_NewItem" ItemsSource="{Binding DataView, ElementName=provinciasDataSource}" IsBusy="{Binding IsBusy, ElementName=provinciasDataSource}">
+            <telerik:RadGridView.Columns>
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding paisId}" Header="PaisId" IsReadOnly="True" />
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding id}" Header="Id" />
+                <telerik:GridViewDataColumn DataMemberBinding="{Binding nombre}" Header="Nombre"/>
+            </telerik:RadGridView.Columns>
+            <telerik:RadContextMenu.ContextMenu>
+                <telerik:RadContextMenu x:Name="GridContextMenu" ItemClick="radContextMenu_ItemClick">
+                    <telerik:RadMenuItem Header="Localidades" x:Name="Localidades" />
+                </telerik:RadContextMenu>
+            </telerik:RadContextMenu.ContextMenu>
+        </telerik:RadGridView>
+        <telerik:RadDataPager x:Name="provinciasDataPager" Source="{Binding DataView, ElementName=provinciasDataSource}" PageSize="5" HorizontalAlignment="Stretch" Margin="11,172,163,0" VerticalAlignment="Top"/>
+        <StatusBar HorizontalAlignment="Stretch" Height="57" VerticalAlignment="Bottom">
+            <StatusBarItem>
+                <TextBlock x:Name="statusInfo"/>
+            </StatusBarItem>
+        </StatusBar>
+        <Border BorderBrush="Gray" BorderThickness="1" HorizontalAlignment="Left" Height="227" Margin="319,10,0,0" VerticalAlignment="Top" Width="1"/>
+        <telerik:RadButton x:Name="btnAdd" HorizontalAlignment="Left" Height="Auto" Margin="325,10,0,0" VerticalAlignment="Top" Width="Auto" Click="btnAdd_Click">
+            <Image Source="../Images/add.png" Stretch="Uniform" Width="25" />
+        </telerik:RadButton>
+        <telerik:RadButton x:Name="btnRemove" HorizontalAlignment="Left" Height="Auto" Margin="361,10,0,0" VerticalAlignment="Top" Width="Auto" Click="btnRemove_Click">
+            <Image Source="../Images/remove.png" Stretch="Uniform" Width="25" />
+        </telerik:RadButton>
+        <telerik:RadButton x:Name="btnSaveAll" HorizontalAlignment="Left" Height="Auto" Margin="325,65,0,0" VerticalAlignment="Top" Width="Auto" Click="btnSaveAll_Click">
+            <Image Source="../Images/save.png" Stretch="Uniform" Width="25" />
+        </telerik:RadButton>
+        <telerik:RadButton x:Name="btnCancelAll" HorizontalAlignment="Left" Height="Auto" Margin="361,65,0,0" VerticalAlignment="Top" Width="Auto" Click="btnCancelAll_Click">
+            <Image Source="../Images/close.png" Stretch="Uniform" Width="25"/>
+        </telerik:RadButton>
+    </Grid>
+</Window>

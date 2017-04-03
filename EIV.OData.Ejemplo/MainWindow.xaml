@@ -1,0 +1,33 @@
+﻿<Window
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:EIV.OData.Ejemplo"
+        xmlns:telerik="http://schemas.telerik.com/2008/xaml/presentation" x:Class="EIV.OData.Ejemplo.MainWindow"
+        mc:Ignorable="d"
+        WindowStyle="ThreeDBorderWindow"
+        Title="ABM Paises/Provincias/Ciudades" Height="350" Width="525" WindowStartupLocation="CenterScreen" WindowState="Maximized" Loaded="MainWindow_Loaded">
+    <Grid>
+
+        <telerik:RadMenu x:Name="MainMenu"  HorizontalAlignment="Stretch" VerticalAlignment="Top" ItemClick="MainMenu_ItemClick">
+            <telerik:RadMenuItem x:Name="archivoMenuItem"  Header="Archivo" Click="archivoMenuItem_Click">
+                <telerik:RadMenuItem Header="Salir"/>
+            </telerik:RadMenuItem>
+            <telerik:RadMenuItem x:Name="paisesMenuItem"  Header="Paises" Click="paisesMenuItem_Click">
+            </telerik:RadMenuItem>
+            <telerik:RadMenuItem x:Name="helpMenuItem" Header="Help">
+                <telerik:RadMenuItem Header="About"/>
+            </telerik:RadMenuItem>
+        </telerik:RadMenu>
+        <StatusBar x:Name="statusBar" HorizontalAlignment="Stretch" Height="27" VerticalAlignment="Bottom">
+            <StatusBarItem>
+                <TextBlock x:Name="statusInfo"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock x:Name="statusDateTime"/>
+            </StatusBarItem>
+        </StatusBar>
+        <Image x:Name="imgLogo" Source="Images/logo.png" HorizontalAlignment="Center" Height="Auto" VerticalAlignment="Center" Width="300"/>
+    </Grid>
+</Window>
